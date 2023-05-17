@@ -55,7 +55,7 @@ public class Evento {
 		return resSeats;
 	}
 	
-	public void prenota(int resSeats) throws Exception {
+	public void reserve(int resSeats) throws Exception {
 		
 		this.resSeats = getResSeats() + resSeats;
 		if (getRemainSeats() == 0) {
@@ -66,7 +66,7 @@ public class Evento {
 		}
 	}
 	
-	public void disdici(int cancSeats) throws Exception {
+	public void cancel(int cancSeats) throws Exception {
 	
 		this.resSeats = getResSeats() - cancSeats;
 		if (getResSeats() < 0) {

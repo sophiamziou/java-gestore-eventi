@@ -1,6 +1,8 @@
 package org.java;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +14,7 @@ public class Main {
 		String title = sc.next();
 		
 		LocalDate date = null;
-		
+		LocalTime hour = null;
 		while (true) {
 			System.out.println("Set the date of the event in format yyyy-mm-dd");
 			String dateString = sc.next();
@@ -28,11 +30,38 @@ public class Main {
 		System.out.println("Set the total seats available");
 		int totSeats = sc.nextInt();
 
+		while (true) {
+			System.out.println("Set the hour of the event in format (hh:mm:ss)");
+			String hourString = sc.next();
+			try {
+				hour = LocalTime.parse(hourString);
+				break;
+			} catch (Exception e) {
+				System.out.println("Error : write hour in correct format");
+				continue;
+			}
+		}
+		
+		
+        BigDecimal price = null;
+        
+        while (true) {
+            System.out.println("Set the price per seat");
+            String priceString = sc.next();
+            try {
+                price = new BigDecimal(priceString);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Write the price in a valid format");
+                continue;
+            }
+        }
+		
 		System.out.println("--------------------");
 		
 		try {
 			
-			Evento e1 = new Evento(title, date, totSeats);
+			Concerto e1 = new Concerto(title, date, totSeats, hour, price);
 			System.out.println(e1);
 			
 			int userVal = -1;
@@ -62,7 +91,7 @@ public class Main {
 							continue;
 						}
 						int numRes = sc.nextInt();
-						e1.prenota(numRes);
+						e1.reserve(numRes);
 						System.out.println("Reserved seats: " + e1.getResSeats() + "\n" + "Available seats : " + e1.getRemainSeats());
 					}
 					
@@ -70,7 +99,7 @@ public class Main {
 						
 						System.out.print("How many reservations do you want to cancel?");
 						int numCanc = sc.nextInt();
-						e1.disdici(numCanc);
+						e1.cancel(numCanc);
 						System.out.println("Reserved seats: " + e1.getResSeats() + "\n" + "Available seats : " + e1.getRemainSeats());		
 					}
 					

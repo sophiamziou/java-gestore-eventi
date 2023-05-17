@@ -34,7 +34,8 @@ public class Concerto extends Evento{
 
 	@Override
 	public String toString() {
-		return getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " " + getHour() + " - " + getTitle() + " - " + getPrice();
+		return getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + 
+				" " + getHour() + " - " + getTitle() + " - " + getPrice();
 		
 	}
 }
