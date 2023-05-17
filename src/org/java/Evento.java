@@ -55,32 +55,26 @@ public class Evento {
 		return resSeats;
 	}
 	
-	public void reserve(int resSeats, LocalDate date) throws Exception {
-		
-		LocalDate currentDate = LocalDate.now();
-		this.resSeats = getResSeats() + 1;
-		if (getResSeats() >= getTotSeats()) {
+	public void prenota(int resSeats) throws Exception {
+		this.resSeats = getResSeats() + resSeats;
+		if (getRemainSeats() > 0) {
 			throw new Exception("No more seats available!");
 		}
-		if (date.isAfter(currentDate)) {
-			this.date = date;
-		}else {
-			throw new Exception("Pick a future date!");
+		if(resSeats > getRemainSeats()) {
+			throw new Exception("Pick a lower number");
 		}
 	}
 	
-	public void cancel(int resSeats, LocalDate date) throws Exception {
-		
-		LocalDate currentDate = LocalDate.now();
-		this.resSeats = getResSeats() - 1;
+	public void disdici(int cancSeats) throws Exception {
+	
+		this.resSeats = getResSeats() - cancSeats;
 		if (getResSeats() == 0) {
 			throw new Exception("No reservation to cancel!");
 		}
-		if (date.isAfter(currentDate)) {
-			this.date = date;
-		}else {
-			throw new Exception("Pick a future date!");
-		}
+	}
+	
+	public int getRemainSeats() {
+		return getTotSeats() - getResSeats();
 	}
 	
 	@Override
