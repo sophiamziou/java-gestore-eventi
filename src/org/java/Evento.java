@@ -80,6 +80,6 @@ public class Evento {
 	
 	@Override
 	public String toString() {
-        return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " - " + title;
+        return getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + " - " + getTitle();
 	}
 }
