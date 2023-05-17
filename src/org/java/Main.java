@@ -14,7 +14,6 @@ public class Main {
 		String title = sc.next();
 		
 		LocalDate date = null;
-		LocalTime hour = null;
 		while (true) {
 			System.out.println("Set the date of the event in format yyyy-mm-dd");
 			String dateString = sc.next();
@@ -30,6 +29,7 @@ public class Main {
 		System.out.println("Set the total seats available");
 		int totSeats = sc.nextInt();
 
+		LocalTime hour = null;
 		while (true) {
 			System.out.println("Set the hour of the event in format (hh:mm:ss)");
 			String hourString = sc.next();
