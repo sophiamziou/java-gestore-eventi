@@ -3,8 +3,6 @@ package org.java;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import org.java.Evento;
-
 public class Main {
 	public static void main(String[] args) throws Exception {
 		
@@ -36,6 +34,7 @@ public class Main {
 			
 			Evento e1 = new Evento(title, date, totSeats);
 			System.out.println(e1);
+			
 			int userVal = -1;
 			
 			while (true) {
@@ -52,22 +51,36 @@ public class Main {
 					System.out.println("retry");
 					continue;
 				}
-				if (userVal == 3) break;
-
-				System.out.println("How many reservations do you want to make?");
 				
-				if (userVal < 1) {
-					System.out.println("You have to make at least 1 reservation");
-					continue;
+				switch(userVal) {
+				
+					case 1:{
+						
+						System.out.print("How many reservations do you want to make?");
+						if (userVal < 1) {
+							System.out.println("You have to make at least 1 reservation");
+							continue;
+						}
+						int numRes = sc.nextInt();
+						e1.prenota(numRes);
+						System.out.println("Reserved seats: " + e1.getResSeats() + "\n" + "Available seats : " + e1.getRemainSeats());
+					}
 					
-				}else {
-					int numRes = sc.nextInt();
-					e1.prenota(numRes);
-					System.out.println("Reserved seats: " + e1.getResSeats() + "\n" + "Available seats : " + e1.getRemainSeats());
-				}
-				System.out.println("-------------------");
-				sc.nextLine();
+					case 2:{
+						
+						System.out.print("How many reservations do you want to cancel?");
+						int numCanc = sc.nextInt();
+						e1.disdici(numCanc);
+						System.out.println("Reserved seats: " + e1.getResSeats() + "\n" + "Available seats : " + e1.getRemainSeats());		
+					}
+					
+					case 3:{
+						break;
+					}
 				
+				}
+				
+				sc.nextLine();
 			}
 			
 		} catch (Exception e) {
@@ -75,5 +88,6 @@ public class Main {
 			System.err.println("Error " + e.getMessage());
 		}
 		
+		sc.close();
 	}
 }

@@ -56,8 +56,9 @@ public class Evento {
 	}
 	
 	public void prenota(int resSeats) throws Exception {
+		
 		this.resSeats = getResSeats() + resSeats;
-		if (getRemainSeats() > 0) {
+		if (getRemainSeats() == 0) {
 			throw new Exception("No more seats available!");
 		}
 		if(resSeats > getRemainSeats()) {
@@ -68,7 +69,7 @@ public class Evento {
 	public void disdici(int cancSeats) throws Exception {
 	
 		this.resSeats = getResSeats() - cancSeats;
-		if (getResSeats() == 0) {
+		if (getResSeats() < 0) {
 			throw new Exception("No reservation to cancel!");
 		}
 	}
